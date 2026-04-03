@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .control {
+            cursor: pointer;
+            font-size: 30px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin: 0 10px;
+        }
+        .progress-container {
+            position: absolute;
+            width: 100%;
+            bottom: 10px;
+            text-align: center;
+            z-index: 100;
+        }
+        .progress-bar {
+            display: inline-block;
+            width: 20px;
+            height: 4px;
+            background-color: white;
+            margin: 0 2px;
+            opacity: 0.7;
+            transition: width 0.5s;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* 修改这里为left */
+            display: flex;
+            flex-direction: row; /* 添加这一行以使按钮横向排列 */
+            justify-content: flex-start; /* 修改这里为flex-start */
+            width: auto; /* 修改这里为auto */
+        }
+        .nav a {
+            color: #ffffff; /* 将导航链接颜色设置为白色 */
+            text-decoration: none;
+            border: 1px solid #ffffff;
+            padding: 15px 30px; /* 修改这里的值以增加按钮宽度 */
+        }
+        .nav a:hover {
+            background-color: #1452af;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <img class="slide active" src="{{ url_for('static', filename='page1.png') }}">
+        <img class="slide" src="{{ url_for('static', filename='page2.png') }}">
+        <img class="slide" src="{{ url_for('static', filename='page3.png') }}" alt="Slide 3">
+        <div class="controls">
+            <div class="control left" onclick="previousSlide()">&#10094;</div>
+            <div class="control right" onclick="nextSlide()">&#10095;</div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+        </div>
+        <!-- ... -->
+        <div class="nav">
+            <a href="/" onclick="return false;">首页</a>
+            <a href="/index1">产品服务</a>
+            <a href="/index2" >核心优势</a>
+            <a href="/index3" >关于我们</a>
+        </div>
+<!-- ... -->
+    </div>
+
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBars = document.querySelectorAll('.progress-bar');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            updateProgress(n);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function updateProgress(n) {
+            progressBars.forEach((bar, index) => {
+                if (index === n) {
+                    bar.style.width = '100%';
+                } else {
+                    bar.style.width = '0';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+            setInterval(nextSlide, 3000); // 自动轮播时间间隔，单位毫秒 (2000毫秒 = 2秒)
+        });
+
+        function loadPage(pageNumber) {
+            switch (pageNumber) {
+                case 0:
+                    window.location.href = "/";
+                    break;
+                case 2:
+                    window.location.href = "/index1";
+                    break;
+                case 3:
+                    window.location.href = "/index2";
+                    break;
+                case 4:
+                    window.location.href = "/index3";
+                    break;
+                default:
+                    console.error("Invalid page number");
+            }
+        }
+    </script>
+</body>
+</html>

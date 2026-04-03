@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们</title>
+    <style>
+
+        body {
+            background-image: url({{ url_for('static', filename='background.png') }});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* 使 body 占满整个视口高度 */
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+        }
+        h1 {
+            font-size: 5em;
+            color: #ffffff;
+        }
+        .content-area {
+            margin: 20px;
+            text-align: left;
+            font-size: 2.5em; /* Changed to match the phone number size */
+        }
+        .nav {
+            text-align: center;
+        }
+        .contact-area p {
+            margin: 0;
+            font-size: 2.0em;
+        }
+        .contact-area .message {
+            font-style: italic;
+            font-size: 2.5em; /* Changed to match the phone number size */
+            color: #ffffff;
+            margin-top: 10px;
+        }
+        .contact-area {
+            position: relative;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            width: 400px;
+            text-align: left;
+            background-color: transparent; /* Changed to transparent */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* 修改这里为left */
+            display: flex;
+            flex-direction: row; /* 添加这一行以使按钮横向排列 */
+            justify-content: flex-start; /* 修改这里为flex-start */
+            width: auto; /* 修改这里为auto */
+        }
+        .nav a {
+            color: #ffffff; /* 将导航链接颜色设置为白色 */
+            text-decoration: none;
+            border: 1px solid #ffffff;
+            padding: 15px 30px; /* 修改这里的值以增加按钮宽度 */
+        }
+        .nav a:hover {
+            background-color: #1452af;
+        }
+    </style>
+</head>
+<body>
+    <h1>关于我们</h1>
+    <div class="nav">
+        <a href="#" onclick="loadPage(0)">首页</a>
+        <a href="#" onclick="loadPage(2)">产品服务</a>
+        <a href="#" onclick="loadPage(3)">核心优势</a>
+        <a href="#" onclick="loadPage(4)">关于我们</a>
+    </div>
+    <div class="content-area">
+        <p>我们团队在涉及APP诈骗的鉴定方面拥有丰富的经验和专长。通过深入分析应用程序的安全性和功能性，我们能够精确识别和评估潜在的诈骗行为。我们利用先进的技术工具和行业标准来检测恶意代码、数据泄露风险和隐私侵犯问题，为客户提供高效、可靠的解决方案。我们的方法论结合了技术深度和创新思维，致力于保护用户免受恶意应用程序的威胁，确保数字环境的安全与稳定。</p>
+    </div>
+    <div class="footer">
+        <div class="contact-info">
+            <p style="font-size: 2em">如果你对检测结果有任何疑问的话，请立即联系我们。</p>
+            <p style="font-size: 2em; margin-top: 20px;">电话：19800000000</p>
+            <p style="font-size: 2em;">电子邮件：762900000@qq.com</p>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(pageNumber) {
+            switch (pageNumber) {
+                case 0:
+                    window.location.href = "/";
+                    break;
+                case 2:
+                    window.location.href = "/index1";
+                    break;
+                case 3:
+                    window.location.href = "/index2";
+                    break;
+                case 4:
+                    window.location.href = "/index3";
+                    break;
+                default:
+                    console.error("Invalid page number");
+            }
+        }
+    </script>
+</body>
+</html>
+

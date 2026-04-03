@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0">
+    <title>涉诈APP鉴定平台</title>
+    <style>
+        body {
+            background-image: url({{ url_for('static', filename='background2.png') }});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* 使 body 占满整个视口高度 */
+            display: flex;
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            ont-family: Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+        }
+        h1 {
+            font-size: 6em;
+            color: #ffffff;
+        }
+        h2 {
+            font-size: 6em;
+            color: #ffffff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* 修改这里为left */
+            display: flex;
+            flex-direction: row; /* 添加这一行以使按钮横向排列 */
+            justify-content: flex-start; /* 修改这里为flex-start */
+            width: auto; /* 修改这里为auto */
+        }
+        .nav a {
+            color: #ffffff; /* 将导航链接颜色设置为白色 */
+            text-decoration: none;
+            border: 1px solid #ffffff;
+            padding: 15px 30px; /* 修改这里的值以增加按钮宽度 */
+        }
+        .nav a:hover {
+            background-color: #1452af;
+        }
+        .upload-area {
+            margin-bottom: 20px;
+        }
+        .upload-area p {
+            margin-bottom: 5px;
+        }
+        .upload-area input[type=file] {
+            display: none;
+        }
+        .upload-area label {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .upload-area label:hover {
+            background-color: #0056b3;
+        }
+        .btn {
+            font-size: 2em;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>涉诈APP鉴定平台</h1>
+        <div class="container">
+
+    <form action="/upload" method="post">
+        <p style="font-size: 3em; margin-top: 10px;">点击获取研判结果</p>
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+            <button type="submit" class="btn">研判分析</button>
+        </div>
+    </form>
+
+    <div class="upload-area">
+        <p style="font-size: 3em; margin-top: 10px;">上传APK文件，获取基本信息</p>
+        <form id="apkForm" action="/upload-apk" method="post" enctype="multipart/form-data">
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 60px;">
+                <input type="file" id="apkInput" name="apkFile" accept="application/vnd.android.package-archive" style="display: none;">
+                <label for="apkInput" class="btn">
+                    选择APK文件
+                </label>
+                <button type="submit" class="btn">上传并分析</button>
+            </div>
+        </form>
+    </div>
+
+        <div class="nav">
+            <a href="/">首页</a>
+            <a href="/index1">产品服务</a>
+            <a href="/index2">核心优势</a>
+            <a href="/index3">关于我们</a>
+        </div>
+    </div>
+    <script>
+        function loadPage(pageNumber) {
+            switch (pageNumber) {
+                case 0:
+                    window.location.href = "/";
+                    break;
+                case 2:
+                    window.location.href = "/index1";
+                    break;
+                case 3:
+                    window.location.href = "/index2";
+                    break;
+                case 4:
+                    window.location.href = "/index3";
+                    break;
+                default:
+                    console.error("Invalid page number");
+            }
+
+        document.getElementById('csvFileInput').addEventListener('change', function() {
+            var file = this.files[0];
+            var formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 处理返回的JSON数据，例如显示在页面上
+                console.log(data.results);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        document.getElementById('apkForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止默认的表单提交
+            var file = document.getElementById('apkInput').files[0];
+            var formData = new FormData();
+            formData.append('apkFile', file);
+
+            fetch('/upload-apk', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 跳转到 results.html 页面，并携带数据
+                window.location.href = `/results?data=${encodeURIComponent(JSON.stringify(data))}`;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        // index1.html中的JavaScript
+        document.querySelector('.btn').addEventListener('click', function(event) {
+            event.preventDefault(); // 阻止默认的表单提交行为
+
+            const formData = new FormData();
+            // 为了兼容服务器端代码，我们仍然需要发送一个空的文件对象
+            formData.append('file', new Blob(), 'dummy.csv');
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 显示结果
+                console.log(data.results);
+                // 这里可以更新页面显示结果
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

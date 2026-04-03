@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        /* 设置整个页面的背景图片 */
+        body {
+            background-image: url('../static/background3.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100vh; /* 使 body 占满整个视口高度 */
+            background-attachment: fixed; /*
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+        }
+
+        /* 设置 h1 和 ul 的样式 */
+        .content {
+            text-align: center;
+            background-color: transparent; /* 去掉背景色 */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 3em; /* 设置 h1 字体大小为 3 倍 em */
+        }
+
+        .content li {
+            font-size: 2em; /* 设置 li 字体大小为 1.5 倍 em */
+        }
+
+        h1, .content li {
+            color: #fff; /* 设置字体颜色为白色 */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>{{ color }}</h1>
+        <ul>
+            {% for url in results %}
+            <li>{{ url }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

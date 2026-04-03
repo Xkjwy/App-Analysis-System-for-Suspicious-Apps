@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload new CSV</title>
+</head>
+<body>
+    <h1>Upload new CSV</h1>
+    {% if error %}
+    <p><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+    <!-- 简化后的表单，只保留一个，并明确指定action属性 -->
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>

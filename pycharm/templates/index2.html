@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心优势</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url({{ url_for('static', filename='background.png') }});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .header {
+            padding: 20px;
+            text-align: center;
+            height: 200px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .column {
+            padding: 20px;
+            text-align: center;
+            flex: 20%;
+        }
+        .left-column {
+            background-image: url({{ url_for('static', filename='core.png') }}); /* 替换为您自己的图片URL */
+            background-size: contain;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-position: center;
+            padding: 150px;
+        }
+        .middle-column {
+            background-image: url({{ url_for('static', filename='core.png') }}); /* 替换为您自己的图片URL */
+            background-size: contain;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-position: center;
+            padding: 150px;
+        }
+        .right-column {
+            background-image: url({{ url_for('static', filename='core.png') }});  /* 替换为您自己的图片URL */
+            background-size: contain;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-position: center;
+            padding: 150px;
+        }
+        .move-down {
+            margin-top: 20px;
+        }
+        .bold-advantage {
+            color: rgb(248, 248, 250);
+        }
+        .bold-advantage2 {
+            font-size: 100px;
+            color:aliceblue
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* 修改这里为left */
+            display: flex;
+            flex-direction: row; /* 添加这一行以使按钮横向排列 */
+            justify-content: flex-start; /* 修改这里为flex-start */
+            width: auto; /* 修改这里为auto */
+        }
+        .nav a {
+            color: #ffffff; /* 将导航链接颜色设置为白色 */
+            text-decoration: none;
+            border: 1px solid #ffffff;
+            padding: 15px 30px; /* 修改这里的值以增加按钮宽度 */
+        }
+        .nav a:hover {
+            background-color: #1452af;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="bold-advantage2">核心优势</h1>
+    </div>
+    <div class="row">
+        <div class="column left-column move-down">
+            <h2 class="bold-advantage">提供诈骗网站黑名单</h2>
+            <p class="bold-advantage">  涉诈APP研判模型通过数据收集和分析，得到一个包含已知诈骗网站URLs的数据库。当用户尝试访问这些网站时，模型能够迅速识别并进行阻止，确保用户免受各类诈骗的侵害 </p>
+        </div>
+        <div class="column middle-column move-down">
+            <h2 class="bold-advantage"> 提取APP安装包基本信息
+            </h2>
+            <p class="bold-advantage"> 自动提取APP安装包基本信息，包括但不限于组件信息、代码签名等，帮助识别APP是否涉诈，确保APP的来源可靠性，防止用户下载到被篡改或伪造的APP </p>
+        </div>
+        <div class="column right-column move-down">
+            <h2 class="bold-advantage"> 诈骗网站研判模型 </h2>
+            <p class="bold-advantage"> 采用多模型研判的方法，对APP安装包的所有URLs进行综合分析，使得模型能够捕捉APP特征。通过训练模型，使其能够对诈骗APP进行快速识别和拦截，提高研判的准确性和效率 </p>
+        </div>
+    </div>
+    <div class="nav">
+        <a href="#" onclick="loadPage(0)">首页</a>
+        <a href="#" onclick="loadPage(2)">产品服务</a>
+        <a href="#" onclick="loadPage(3)">核心优势</a>
+        <a href="#" onclick="loadPage(4)">关于我们</a>
+    </div>
+    <script>
+        function loadPage(pageNumber) {
+            switch (pageNumber) {
+                case 0:
+                    window.location.href = "/";
+                    break;
+                case 2:
+                    window.location.href = "/index1";
+                    break;
+                case 3:
+                    window.location.href = "/index2";
+                    break;
+                case 4:
+                    window.location.href = "/index3";
+                    break;
+                default:
+                    console.error("Invalid page number");
+            }
+        }
+    </script>
+</body>
+</html>

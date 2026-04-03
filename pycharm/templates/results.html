@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APK Information</title>
+    <style>
+        body {
+            background-image: url({{ url_for('static', filename='background.png') }});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* 使 body 占满整个视口高度 */
+            background-attachment: fixed; /*
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+        }
+        .container {
+            text-align: left; /* 默认情况下，文本是居中的，所以我们需要将其改为左对齐 */
+            background-color: transparent; /* 去掉背景色 */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 4em; /* 设置 h1 元素的字体大小为 4 倍 em */
+        }
+        .info-item {
+            font-size: 35px; /* 设置字体大小 */
+        }
+    </style>
+</head>
+<body>
+    <h1>APK Information</h1>
+    <div class="container">
+        <div id="info">
+            {% for key, value in info.items() %}
+            <div class="info-item">
+                <strong>{{ key }}:</strong> {{ value }}<br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
